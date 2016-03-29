@@ -1,13 +1,8 @@
-var React = require('react');
+// NODE MODULES
 var ReactDOM = require('react-dom');
 
-var Hello = React.createClass({
-  render: function() {
-    return <h1 className="red">
-      Hello!
-    </h1>
-  }
-});
+// APPLICATION COMPONENTS
+var Routes = require('./routes');
 
-var element = React.createElement(Hello, {});
-ReactDOM.render(element, document.querySelector('.container'));
+// Initial render
+ReactDOM.render(Routes, document.querySelector('.container'));

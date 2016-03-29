@@ -1,28 +1,27 @@
-ReactStarter
-====
+# React Imgur Browser
 
-Use this as a starting point for working on chapters of the [Build Web Apps with React JS and Flux](https://www.udemy.com/learn-and-understand-reactjs/) course on Udemy.com.
+This was my 'leaning React' project, with thanks to [Stephen Grider](https://github.com/StephenGrider). I highly recommend his React courses on Udemy. 
 
----
+Current commit is ES6 refactor. Previous commit is ES5 version.
 
-###Getting Started###
+This has been extensively commented and might serve as a useful reference for someone in how to build a basic React/Reflux/React-Router app including async API Calls.
 
-There are two methods for getting started with this repo.
+## The app
 
-####Familiar with Git?#####
-Checkout this repo, install dependencies, then start the gulp process with the following:
+Allows the user to navigate through Imgur images/videos from the main categories
 
-```
-	> git clone https://github.com/StephenGrider/ReactStarter.git
-	> cd ReactStarter
-	> npm install
-	> gulp
-```
+#### Features:
 
-####Not Familiar with Git?#####
-Click [here](https://github.com/StephenGrider/ReactStarter/releases) then download the .zip file.  Extract the contents of the zip file, then open your terminal, change to the project directory, and:
+* Single page app with dynamic URLs (via React Router) allowing easy link sharing
+* HTML5 videos, including autoplay on mouseover
+* Dynamic updates via Imgur API, called via Fetch (no jQuery) with ES6 polyfill
+* Bootstrap components / SCSS for additional styles
+* Modern build tools, including live reload and error handling
 
-```
-	> npm install
-	> gulp
-```
+## Build instructions
+
+* Clone repo
+* `npm install` (several components so could take some time)
+* `gulp` - default task will build and start live reload server
+* If browser not launched automatically, navigate to localhost:8000
+* Browserify/live reload will automatically rebuild and reload when changes made

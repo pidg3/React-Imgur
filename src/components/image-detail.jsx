@@ -1,39 +1,39 @@
 // NODE MODULES
-var React = require('react');
-var Reflux = require('reflux');
+import React from 'react';
 
 // APPLICATION COMPONENTS
-var ImageStore = require('../stores/image-store');
-var CommentStore = require('../stores/comment-store');
-var Actions = require('../actions');
-var CommentBox = require('./comment-box');
+import ImageStore from '../stores/image-store';
+import CommentStore from '../stores/comment-store';
+import Actions from '../actions';
+import CommentBox from './comment-box';
 
-module.exports = React.createClass({
-  displayName: 'ImageDetail',
-  propTypes: {
-    params: React.PropTypes.object.isRequired
-  },
-  mixins: [
-    // needs to listen to both stores, as either can trigger a change
-    Reflux.listenTo(ImageStore, 'onChange'),
-    Reflux.listenTo(CommentStore, 'onChange')
-  ],
-  getInitialState: function() {
-    return {
+class ImageDetail extends React.Component {
+  constructor() {
+    super();
+    this.onChange = this.onChange.bind(this);
+    this.state = {
       // object vs array is just due to way Imgur API works
       image: {},
       comments: []
     };
-  },
-  componentWillMount: function () {
+  }
+  componentWillMount () {
     Actions.getSingleImage(this.props.params.id);
-  },
-  render: function() {
+  }
+  componentDidMount () {
+    this.unsubscribeImage = ImageStore.listen(this.onChange);
+    this.unsubscribeComment = CommentStore.listen(this.onChange);
+  }
+  componentWillUnmount() {
+    this.unsubscribeImage();
+    this.unsubscribeComment();
+  }
+  render() {
     return <div className="image-detail">
       {this.state.image ? this.renderContent() : null}
     </div>;
-  },
-  renderContent: function() {
+  }
+  renderContent() {
     return <div className="panel panel-default">
       <div className="panel-heading">
         <h4>{this.state.image.title}</h4>
@@ -47,14 +47,14 @@ module.exports = React.createClass({
       <h3>Comments</h3>
         {this.renderComments()}
     </div>;
-  },
+  }
   renderComments() {
     if (!this.state.comments) {
       return null;
     }
     return <CommentBox comments={this.state.comments} />;
-  },
-  renderImage: function() {
+  }
+  renderImage() {
     if (this.state.image.animated) {
       return <video
         preload="auto"
@@ -68,11 +68,21 @@ module.exports = React.createClass({
     else {
       return <img src={this.state.image.link} />;
     }
-  },
-  onChange: function() {
+  }
+  onChange() {
     this.setState({
       image: ImageStore.find(this.props.params.id),
       comments: CommentStore.comments
     });
   }
-});
+}
+
+// add properties
+ImageDetail.displayName = 'ImageDetail';
+ImageDetail.propTypes = {
+  params: React.PropTypes.object.isRequired
+};
+
+// export
+
+module.exports = ImageDetail;

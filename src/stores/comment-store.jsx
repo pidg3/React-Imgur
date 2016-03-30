@@ -1,13 +1,13 @@
 // NODE MODULES
-var Reflux = require('reflux');
+import Reflux from 'reflux';
 
 // APPLICATION COMPONENTS
-var Api = require('../utils/api');
-var Actions = require('../actions');
+import Api from '../utils/api';
+import Actions from '../actions';
 
 // refer to topic-store for main store comments
 
-module.exports = Reflux.createStore({
+var CommentStore = Reflux.createStore({
   listenables: [Actions],
   getSingleImage: function(id) {
     return Api.get('gallery/' + id + '/comments')
@@ -20,3 +20,9 @@ module.exports = Reflux.createStore({
     this.trigger('change', this.comments);
   }
 });
+
+// add properties
+CommentStore.listenables = [Actions];
+
+// export
+module.exports = CommentStore;

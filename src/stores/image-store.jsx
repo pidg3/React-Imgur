@@ -1,14 +1,14 @@
 // NODE MODULES
-var Reflux = require('reflux');
-var _ = require('lodash');
+import Reflux from 'reflux';
+import _ from 'lodash';
 
 // APPLICATION COMPONENTS
-var Api = require('../utils/api');
-var Actions = require('../actions');
+import Api from '../utils/api';
+import Actions from '../actions';
 
 // refer to topic-store for main store comments
 
-module.exports = Reflux.createStore({
+var ImageStore = Reflux.createStore({
   listenables: [Actions],
   getImages: function(topicID) {
     return Api.get('topics/' + topicID)
@@ -47,3 +47,6 @@ module.exports = Reflux.createStore({
     this.trigger('change', this.images);
   }
 });
+
+// export
+module.exports = ImageStore;

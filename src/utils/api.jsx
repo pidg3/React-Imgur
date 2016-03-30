@@ -1,9 +1,8 @@
 // NODE MODULES
 // what-wg fetch is polyfill for ES6 fetch
-var Fetch = require('whatwg-fetch');
+import Fetch from 'whatwg-fetch';
 
 var rootUrl = 'https://api.imgur.com/3/';
-
 var apiKey = 'bbbdda339b27603';
 
 module.exports = {

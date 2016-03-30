@@ -1,29 +1,19 @@
 // NODE MODULES
-var React = require('react');
-var Header = require('./header');
+import React from 'react';
+import Header from './header';
 
 // APPLICATION COMPONENTS
-var TopicList = require('./topic-list');
+import TopicList from './topic-list';
 
-module.exports = React.createClass({
-  // displayName required to produce better error messages
-  // produces linter error message if not defined
-  displayName: 'Main',
-
-  // prop validation - seen as a good practice and avoids linter warning
-  // will produce error message is incorrect type supplied
-  // .isRequired NOT specified here as
-  propTypes: {
-    children: React.PropTypes.object
-  },
-  render: function() {
+class Main extends React.Component {
+  render() {
     // returns Header as defined separately and content in separate function
     return <div>
       <Header />
       {this.content()}
     </div>;
-  },
-  content: function() {
+  }
+  content() {
     // we can use props.children as this is a react-router property
     // topics/images are defined as children of / rather than separate routes
     // EXAMPLE: url /images/2 would return {ImageDetail}
@@ -36,4 +26,20 @@ module.exports = React.createClass({
       return <TopicList />;
     }
   }
-});
+}
+
+// add properties
+
+// displayName required to produce better error messages
+// produces linter error message if not defined
+Main.displayName = 'Main';
+
+// prop validation - seen as a good practice and avoids linter warning
+// will produce error message is incorrect type supplied
+Main.propTypes = {
+  params: React.PropTypes.object.isRequired
+};
+
+// export
+
+module.exports = Main;

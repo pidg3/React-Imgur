@@ -1,5 +1,5 @@
 // NODE MODULES
-var Reflux = require('reflux');
+import Reflux from 'reflux';
 
 // actions are needed in Reflux architecture to access stores
 // single action can access multiple stores e.g. getSingleImage accesses ...

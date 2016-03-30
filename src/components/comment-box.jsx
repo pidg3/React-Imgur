@@ -1,16 +1,13 @@
-var React = require('react');
+// NODE MODULES
+import React from 'react';
 
-module.exports = React.createClass({
-  displayName: 'CommentBox',
-  propTypes: {
-    comments: React.PropTypes.array.isRequired
-  },
-  render: function() {
+class CommentBox extends React.Component {
+  render() {
     return <ul className="list-group">
       {this.renderComments()}
     </ul>;
-  },
-  renderComments: function() {
+  }
+  renderComments() {
     return this.props.comments.slice(0, 20).map(function(comment) {
       return <li className="list-group-item comment-box" key={comment.id}>
         <span className="badge">{comment.ups}</span>
@@ -19,5 +16,13 @@ module.exports = React.createClass({
       </li>;
     });
   }
+}
 
-});
+// add properties
+CommentBox.displayName = 'CommentBox';
+CommentBox.propTypes = {
+  comments: React.PropTypes.array.isRequired
+};
+
+// export
+module.exports = CommentBox;

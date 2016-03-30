@@ -1,20 +1,18 @@
 // NODE MODULES
-var React = require('react');
-var ReactRouter = require('react-router');
-var Router = ReactRouter.Router;
-var Route = ReactRouter.Route;
-var HashHistory = ReactRouter.hashHistory;
+import React from 'react';
+import { Router, Route, hashHistory } from 'react-router';
+
 
 // APPLICATION COMPONENTS
-var Main = require('./components/main');
-var Topic = require('./components/topic');
-var ImageDetail = require('./components/image-detail');
+import Main from './components/main';
+import Topic from './components/topic';
+import ImageDetail from './components/image-detail';
 
 module.exports = (
   // has history required due to use of react-router 2.0
   // URL history no longer specific by defauly, so has to be explicitly defined
 
-  <Router history={HashHistory}>
+  <Router history={hashHistory}>
     {/* always defined: header */}
     <Route path="/" component={Main}>
       {/* only displays if /topics in URL */}

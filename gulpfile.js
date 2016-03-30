@@ -11,8 +11,8 @@ var browserify = require('browserify');
 // speeds up browserify bundling process once initial bundle is complete
 var watchify = require('watchify');
 
-// needed to translate JSX as part of build process
-var reactify = require('reactify');
+// needed to translate JSX/ES6 as part of build process
+var babelify = require('babelify');
 
 // for error notifications in code editor
 var notifier = require('node-notifier');
@@ -50,7 +50,8 @@ var notify = function(error) {
 // bundle main.js using browersify
 var bundler = watchify(browserify({
   entries: ['./src/app.jsx'],
-  transform: [reactify],
+  // transform: babelify (with required presets for react/es6) replaces obsolete reactify
+  transform: [[babelify, {presets: ['es2015', 'react']}]],
   extensions: ['.jsx'],
   debug: true,
   cache: {},

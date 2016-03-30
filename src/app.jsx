@@ -1,8 +1,8 @@
 // NODE MODULES
-var ReactDOM = require('react-dom');
+import ReactDOM from 'react-dom';
 
 // APPLICATION COMPONENTS
-var Routes = require('./routes');
+import Routes from './routes';
 
 // Initial render
 ReactDOM.render(Routes, document.querySelector('.container'));
